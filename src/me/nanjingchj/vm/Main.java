@@ -1,7 +1,16 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * List of opcodes
+ * stp: stop the execution, no args
+ * def: define a new int variable (4 bytes long)
+ *      syntax:
+ *          defintcmaxcma0x0000000Asep
+ *          def int, x, 10
+ * sep: separate the current statement from the next one
+ * cma, comma, separator for the args
+ * mov: move the value stored in the 2nd var into the 1st var
+ *      syntax:
+ *          movxcmaysep
+ *          mov x, y
  */
 package me.nanjingchj.vm;
 
@@ -11,6 +20,8 @@ import java.io.IOException;
 
 public class Main {
     private static FileInputStream inputStream;
+    private static int index = 0;
+    private static byte[] bytes;
 
     public static void main(String[] args) {
         if (args.length != 1) {
@@ -24,10 +35,11 @@ public class Main {
         try {
             inputStream = new FileInputStream(fileName);
             long fileSize = new File(fileName).length();
-            byte[] bytes = new byte[(int) fileSize];
+            bytes = new byte[(int) fileSize];
             inputStream.read(bytes);
-            //System.out.println(Arrays.toString(bytes));
 
+            // start the execution
+            new Thread(new VM()).start();
         } catch (IOException ex) {
             ex.printStackTrace();
             System.exit(-1);
@@ -35,7 +47,8 @@ public class Main {
     }
 
     public static byte nextByte() {
-        // TODO simulate a byte stream by returning the next byte to read
+        index++;
+        return bytes[index - 1];
     }
 
 }
