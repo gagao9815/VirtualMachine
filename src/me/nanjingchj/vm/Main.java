@@ -3,13 +3,12 @@
  * stp: stop the execution, no args
  * def: define a new int variable (4 bytes long)
  *      syntax:
- *          defintcmaxcma0x0000000Asep
- *          def int, x, 10
- * sep: separate the current statement from the next one
- * cma, comma, separator for the args
+ *          defint,x,10;
+ * ;: separate the current statement from the next one
+ * ,: argument separator
  * mov: move the value stored in the 2nd var into the 1st var
  *      syntax:
- *          movxcmaysep
+ *          movx,y;
  *          mov x, y
  */
 package me.nanjingchj.vm;

@@ -26,21 +26,14 @@ public class VM implements Runnable {
                 do {
                     byte nextByte = Main.nextByte();
                     argsAL.add(nextByte);
-                    // convert to string
-                    String argsS = "";
-                    for (byte b : argsAL) {
-                        argsS += Character.toString(b);
-                    }
-                    if (argsS.toLowerCase().contains("sep")) {
-                        // the separation mark is reached
-                        sepReached = true;
-                        // remove the final 3 characters of the arguments
 
+                    if (Character.toString(nextByte).equals(";")) {
+                        sepReached = true;
                     }
                 } while (!sepReached);
 
                 // get them into a byte array
-                byte[] args = new byte[argsAL.size() - 3];
+                byte[] args = new byte[argsAL.size() - 1];
                 for (int i = 0; i < args.length; i++) {
                     args[i] = argsAL.get(i);
                 }
